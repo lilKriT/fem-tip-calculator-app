@@ -10,6 +10,21 @@
   --color-foreground: var(--foreground);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono); */
+
+  /* Default font: 24px */
+  --font-mono: var(--font-space-mono);
+  --text-base: 1.5rem;
+
+  /* Colors */
+  /* Primary */
+  --color-green-400: hsl(172, 67%, 45%);
+
+  /* Neutral */
+  --color-green-900: hsl(183, 100%, 15%);
+  --color-green-500: hsl(186, 14%, 43%);
+  --color-green-400: hsl(184, 14%, 56%);
+  --color-green-200: hsl(185, 41%, 84%);
+  --color-green-50: hsl(189, 47%, 97%);
 }
 
 body {
