@@ -1,19 +1,23 @@
 "use client";
 
 import Image from "next/image";
-import { ChangeEvent, useState } from "react";
+import { useState } from "react";
 
 export default function Home() {
-  const [bill, setBill] = useState("0");
+  const [bill, setBill] = useState("");
+  const [tip, setTip] = useState("");
+  const [people, setPeople] = useState("");
 
-  function handleBillChange(e: ChangeEvent<HTMLInputElement>) {
-    const value = Number(e.target.value);
+  const billValidated = Number(bill);
+  const tipValidated = Number(tip);
+  const peopleValidated = Number(people);
+  // const canCalc =
+  //   !isNaN(billValidated) &&
+  //   !isNaN(tipValidated) &&
+  //   !isNaN(peopleValidated) &&
+  //   peopleValidated > 0;
 
-    if (isNaN(value) || value < 0) return;
-
-    console.log(value);
-    setBill(value);
-  }
+  const canCalc = !isNaN(billValidated);
 
   return (
     <section className="min-h-dvh flex justify-center items-center">
@@ -23,7 +27,7 @@ export default function Home() {
 
         <div className="grid grid-cols-2 gap-12 bg-white px-16 py-12 rounded-3xl">
           {/* Left column */}
-          <div className="flex flex-col justify-center items-start gap-8">
+          <form className="flex flex-col justify-center items-start gap-8">
             {/* Bill */}
             <label className="flex flex-col gap-1">
               <h2>Bill</h2>
@@ -119,11 +123,12 @@ export default function Home() {
 
             {/* Number of People */}
             <p>Number of People</p>
-          </div>
+          </form>
 
           {/* Right Column */}
           <div className="bg-green-900">
             <p>Tip Amount / person</p>
+            <p>{canCalc ? "Valid" : "inValid"}</p>
 
             <p>Total / person</p>
 
