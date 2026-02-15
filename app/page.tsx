@@ -1,15 +1,27 @@
 "use client";
 
 import Image from "next/image";
+import { ChangeEvent, useState } from "react";
 
 export default function Home() {
+  const [bill, setBill] = useState("0");
+
+  function handleBillChange(e: ChangeEvent<HTMLInputElement>) {
+    const value = Number(e.target.value);
+
+    if (isNaN(value) || value < 0) return;
+
+    console.log(value);
+    setBill(value);
+  }
+
   return (
     <section className="min-h-dvh flex justify-center items-center">
       <div className="flex flex-col gap-16 justify-center items-center">
         {/* Logo */}
         <Image src={"/logo.svg"} alt="Splitter Logo" width={87} height={54} />
 
-        <div className="grid grid-cols-2 gap-12 bg-white text-green-500 px-16 py-12 rounded-3xl">
+        <div className="grid grid-cols-2 gap-12 bg-white px-16 py-12 rounded-3xl">
           {/* Left column */}
           <div className="flex flex-col justify-center items-start gap-8">
             {/* Bill */}
@@ -17,9 +29,11 @@ export default function Home() {
               <h2>Bill</h2>
               <input
                 type="text"
-                inputMode="decimal"
+                inputMode="numeric"
                 className="input--text"
                 placeholder="0"
+                value={bill}
+                onChange={(e) => setBill(e.target.value)}
               />
             </label>
 
@@ -35,10 +49,10 @@ export default function Home() {
                     value={5}
                     className="peer sr-only"
                   />
-                  <span className="calculcator__button">5%</span>
+                  <span className="calculator-label">5%</span>
                 </label>
 
-                <label htmlFor="tip-10">
+                <label htmlFor="tip-10" className="block">
                   <input
                     type="radio"
                     name="tipAmount"
@@ -46,10 +60,10 @@ export default function Home() {
                     value={10}
                     className="peer sr-only"
                   />
-                  <span className="calculcator__button">10%</span>
+                  <span className="calculator-label">10%</span>
                 </label>
 
-                <label htmlFor="tip-15">
+                <label htmlFor="tip-15" className="block">
                   <input
                     type="radio"
                     name="tipAmount"
@@ -57,10 +71,10 @@ export default function Home() {
                     value={15}
                     className="peer sr-only"
                   />
-                  <span className="calculcator__button">15%</span>
+                  <span className="calculator-label">15%</span>
                 </label>
 
-                <label htmlFor="tip-25">
+                <label htmlFor="tip-25" className="block">
                   <input
                     type="radio"
                     name="tipAmount"
@@ -68,10 +82,10 @@ export default function Home() {
                     value={25}
                     className="peer sr-only"
                   />
-                  <span className="calculcator__button">25%</span>
+                  <span className="calculator-label">25%</span>
                 </label>
 
-                <label htmlFor="tip-50">
+                <label htmlFor="tip-50" className="block">
                   <input
                     type="radio"
                     name="tipAmount"
@@ -79,10 +93,27 @@ export default function Home() {
                     value={50}
                     className="peer sr-only"
                   />
-                  <span className="calculcator__button">50%</span>
+                  <span className="calculator-label">50%</span>
                 </label>
 
-                <p>Custom</p>
+                <label htmlFor="tip-custom" className="block">
+                  <input
+                    type="radio"
+                    name="tipAmount"
+                    id="tip-custom"
+                    value={"custom"}
+                    className="peer sr-only"
+                    // onSelect={() => console.log("Custom tip clicked!")}
+                  />
+                  <input
+                    type="text"
+                    className="max-w-32 bg-gray-50 rounded-sm text-right py-1 px-2"
+                    // onSelect={() => console.log("Text field tip clicked!")}
+                    onChange={() => {
+                      console.log("Text field changed!");
+                    }}
+                  />
+                </label>
               </div>
             </fieldset>
 
